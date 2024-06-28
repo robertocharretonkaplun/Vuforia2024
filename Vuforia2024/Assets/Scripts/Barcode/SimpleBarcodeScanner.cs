@@ -15,14 +15,11 @@ public class SimpleBarcodeScanner : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    BarcodeManager.Instance.GoToWebSite_Btn_Status();
     if (mBarcodeBehaviour != null && mBarcodeBehaviour.InstanceData != null)
     {
-      if (!BarcodeManager.Instance.wasDetected)
-      {
-        BarcodeManager.Instance.History.Add(mBarcodeBehaviour.InstanceData.Text);
-        BarcodeManager.Instance.wasDetected = true;
-      }
-      barcodeAsText.text = mBarcodeBehaviour.InstanceData.Text;
+      BarcodeManager.Instance.StoreHistoryItem(mBarcodeBehaviour.InstanceData.Text);
+      barcodeAsText.text = BarcodeManager.Instance.GetLastItemFromHistory();
     }
     else
     {
